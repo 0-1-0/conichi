@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :hotels
+  resources :bookings
+  devise_for :users
   get 'places/location'
 
   get 'home/index'

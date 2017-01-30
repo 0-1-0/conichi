@@ -19,6 +19,7 @@
                         React.DOM.th null, 'Address'
                         React.DOM.th null, 'Rating'
                         React.DOM.th null, 'Photo'
+                        React.DOM.th null, ''
                 React.DOM.tbody null,
                     for hotel in @state.hotels
                         console.log hotel.name
