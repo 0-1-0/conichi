@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :hotels
   get 'places/location'
 
   get 'home/index'
@@ -8,6 +9,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'home#index'
+  get "/img/:reference" => "places#image_proxy"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
