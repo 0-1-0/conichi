@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   root 'home#index'
   get "/img/:reference" => "places#image_proxy"
 
+  post 'bookings' => 'bookings#create'
+  get 'bookings' => 'bookings#show'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

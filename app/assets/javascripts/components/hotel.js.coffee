@@ -1,6 +1,6 @@
 @Hotel = React.createClass
     render: ->
-        console.log @props.hotel
+        hname = @props.hotel.name
         React.DOM.tr null,
             React.DOM.td null, @props.hotel.name
             React.DOM.td null, @props.hotel.address
@@ -11,7 +11,15 @@
             React.DOM.td null,
                 React.DOM.button 
                     onClick: ->
-                        alert '!',
+                        $.ajax(
+                            type: 'POST'
+                            url: '/bookings'
+                            data:
+                                hotel_name: hname
+                                name: hname
+                            contentType: 'application/json'
+                            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                            charset: 'utf-8')
                     'Book'
         # React.DOM.td null, @props.record.title
         # React.DOM.td null, amountFormat(@props.record.amount)
