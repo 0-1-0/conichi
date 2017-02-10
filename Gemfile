@@ -28,6 +28,9 @@ gem 'slim-rails'
 gem "twitter-bootstrap-rails"
 gem 'lodash-rails'
 
+gem 'momentjs-rails'
+gem "rails-bootstrap-daterangepicker"
+
 gem 'react-rails', '~> 1.4.0'
 gem 'react-router-rails', '~>0.13.3.2'
 

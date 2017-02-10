@@ -9,7 +9,8 @@
                 for photo_url in @props.hotel.photos
                     React.DOM.img src: '/img/' + photo_url
             React.DOM.td null,
-                React.DOM.button 
+                React.DOM.button
+                    className: 'btn btn-default' 
                     onClick: ->
                         $.ajax(
                             type: 'POST'

@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require lodash
 //= require twitter/bootstrap
+//= require moment
+//= require bootstrap-daterangepicker
 //= require react
 //= require react_ujs
 //= require react_router.min
