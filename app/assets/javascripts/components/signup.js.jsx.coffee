@@ -3,6 +3,7 @@
         email: ''
         password: ''
         password_confirmation: ''
+        name: ''
         app: @props.app
     handleSignInClick: ->
         app = @state.app
@@ -30,6 +31,12 @@
                 value: @state.email
                 onChange: @handleChange
                 placeholder: 'email'
+            React.DOM.input
+                type: 'text'
+                name: 'name'
+                value: @state.name
+                onChange: @handleChange
+                placeholder: 'username'
             React.DOM.input
                 type: 'password'
                 name: 'password'
