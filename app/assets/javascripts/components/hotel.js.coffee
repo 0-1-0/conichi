@@ -1,4 +1,6 @@
 @Hotel = React.createClass
+    getInitialState: ->
+        parent_state: null
     render: ->
         hname = @props.hotel.name
         React.DOM.tr null,

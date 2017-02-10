@@ -19,5 +19,5 @@
     if @state.signedIn
       return `<Hotels app={this}/>`
     else
-      return `<div><SignUp app={this}/><SignIn app={this}/></div>`
+      return `<div><SignIn app={this}/><SignUp app={this}/></div>`
 )

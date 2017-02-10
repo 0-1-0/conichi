@@ -5,7 +5,7 @@
         password_confirmation: ''
         name: ''
         app: @props.app
-    handleSignInClick: ->
+    handleSignUpClick: ->
         app = @state.app
         $.ajax(
             method: 'POST',
@@ -24,34 +24,49 @@
         nextState[ev.target.name] = ev.target.value
         @setState(nextState)
     render: ->
-        React.DOM.form null,
+      React.DOM.form null,
+          React.DOM.div
+            className: 'form-group'
             React.DOM.input
                 type: 'email'
                 name: 'email'
+                className: 'form-control'
                 value: @state.email
                 onChange: @handleChange
                 placeholder: 'email'
+          React.DOM.div
+            className: 'form-group'
             React.DOM.input
                 type: 'text'
+                className: 'form-control'
                 name: 'name'
                 value: @state.name
                 onChange: @handleChange
                 placeholder: 'username'
+          React.DOM.div
+            className: 'form-group'
             React.DOM.input
                 type: 'password'
+                className: 'form-control'
                 name: 'password'
                 value: @state.password
                 onChange: @handleChange
                 placeholder: 'password'
+          React.DOM.div
+            className: 'form-group'
             React.DOM.input
                 type: 'password'
+                className: 'form-control'
+                name: 'password_confirmation'
                 value: @state.password_confirmation
                 onChange: @handleChange
-                name: 'password_confirmation'
-                placeholder: 'confirm password'
-            React.DOM.input
-                onClick: @handleSignInClick
-                defaultValue: "sign up"
+                placeholder: 'password confirmation'
+          React.DOM.div
+            className: 'form-group'
+            React.DOM.button
+                className: 'btn btn-default form-control'
+                onClick: @handleSignUpClick
+                'Sign Up'
 
 )
       #   """<form>

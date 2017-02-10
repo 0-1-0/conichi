@@ -2,6 +2,8 @@
     getInitialState: ->
         hotels: []#@props.data
         app: @props.app
+        start: ''
+        finish: ''
     getDefaultProps: ->
         hotels: []
     handleSignOut: ->
@@ -16,29 +18,28 @@
         React.DOM.div
             className: 'hotels row'
             React.DOM.div
-                className: 'col-lg-6 col-lg-offset-1'
+                className: 'row'
+                React.DOM.a
+                    className: 'pull-right'
+                    href: 'javascript:void()'
+                    onClick: @handleSignOut
+                    'Sign Out'
+                React.DOM.h2
+                    className: 'title'
+                    'Book hotels nearby'
+            React.DOM.div
+                className: 'row'
+                React.DOM.label
+                    'Select booking dates'
+            React.DOM.div
+                className: 'row'
+                React.DOM.input
+                    type: 'text'
+                    className: 'daterange'
                 React.DOM.div
-                    className: 'row'
-                    React.DOM.a
-                        className: 'pull-right'
-                        href: 'javascript:void()'
-                        onClick: @handleSignOut
-                        'Sign Out'
-                React.DOM.div
-                    className: 'row'
-                    React.DOM.div
-                        className: 'form-group'
-                        React.DOM.input
-                            className: 'form-control'
-                            type: 'text'
-                            className: 'daterange'
-                React.DOM.div
-                    className: 'row'
-                    React.DOM.h2
-                        className: 'title'
-                        'Hotels'
+                    className: 'row top-space'
                     React.DOM.table
-                        className: 'table table-bordered'
+                        className: 'table'
                         React.DOM.thead null,
                             React.DOM.tr null,
                                 React.DOM.th null, 'Name'
@@ -49,7 +50,7 @@
                         React.DOM.tbody null,
                             for hotel in @state.hotels
                                 console.log hotel.name
-                                React.createElement Hotel, key: hotel.name, hotel: hotel
+                                React.createElement Hotel, key: hotel.name, hotel: hotel, parent_state: @state
 
     componentDidMount: ->
         $('input[class="daterange"]').daterangepicker(
@@ -57,7 +58,8 @@
                 buttonClasses: 'btn btn-default'
             },
             (start, finish, label) ->
-                alert(start + " " + finish)
+                @state.start = start.format('YYYY-MM-DD')
+                @state.finish = finish.format('YYYY-MM-DD')
         )
         that = this
         if navigator.geolocation

@@ -21,22 +21,31 @@
         nextState[ev.target.name] = ev.target.value
         @setState(nextState)
     render: ->
-        React.DOM.form null,
+      React.DOM.form null,
+          React.DOM.div
+            className: 'form-group'
             React.DOM.input
                 type: 'email'
                 name: 'email'
+                className: 'form-control'
                 value: @state.email
                 onChange: @handleChange
                 placeholder: 'email'
+          React.DOM.div
+            className: 'form-group'
             React.DOM.input
                 type: 'password'
+                className: 'form-control'
                 name: 'password'
                 value: @state.password
                 onChange: @handleChange
                 placeholder: 'password'
-            React.DOM.input
+          React.DOM.div
+            className: 'form-group'
+            React.DOM.button
+                className: 'btn btn-default form-control'
                 onClick: @handleSignInClick
-                defaultValue: "sign in"
+                'Sign In'
 
 )
       #   """<form>
