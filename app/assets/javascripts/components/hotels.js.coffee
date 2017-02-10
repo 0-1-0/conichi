@@ -49,17 +49,17 @@
                                 React.DOM.th null, ''
                         React.DOM.tbody null,
                             for hotel in @state.hotels
-                                console.log hotel.name
                                 React.createElement Hotel, key: hotel.name, hotel: hotel, parent_state: @state
 
     componentDidMount: ->
+        that = this
         $('input[class="daterange"]').daterangepicker(
             {
                 buttonClasses: 'btn btn-default'
             },
             (start, finish, label) ->
-                @state.start = start.format('YYYY-MM-DD')
-                @state.finish = finish.format('YYYY-MM-DD')
+                that.state.start = start.format('YYYY-MM-DD')
+                that.state.finish = finish.format('YYYY-MM-DD')
         )
         that = this
         if navigator.geolocation
