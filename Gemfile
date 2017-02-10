@@ -26,8 +26,10 @@ gem 'google_places'
 
 gem 'slim-rails'
 gem "twitter-bootstrap-rails"
+gem 'lodash-rails'
 
-gem 'react-rails', '~> 1.0'
+gem 'react-rails', '~> 1.4.0'
+gem 'react-router-rails', '~>0.13.3.2'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

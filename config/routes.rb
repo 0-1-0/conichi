@@ -12,6 +12,10 @@ Rails.application.routes.draw do
   root 'home#index'
   get "/img/:reference" => "places#image_proxy"
 
+  scope :auth do
+    get 'is_signed_in', to: 'auth#is_signed_in?'
+  end
+
   post 'bookings' => 'bookings#create'
   get 'bookings' => 'bookings#show'
 

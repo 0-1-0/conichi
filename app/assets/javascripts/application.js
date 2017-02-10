@@ -12,8 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require lodash
 //= require twitter/bootstrap
 //= require react
 //= require react_ujs
+//= require react_router.min
+//= require react_router_ujs
 //= require components
 //= require_tree .

@@ -1,13 +1,24 @@
 @Hotels = React.createClass
     getInitialState: ->
-        hotels: @props.data
+        hotels: []#@props.data
+        app: @props.app
     getDefaultProps: ->
         hotels: []
+    handleSignOut: ->
+        app = @state.app
+        $.ajax(
+            method: 'DELETE',
+            url: '/users/sign_out.json',
+            data:
+                authenticity_token: Functions.getMetaContent("csrf-token")
+            ).done(app.logout)
     render: ->
-        console.log 'render'
-        console.log @state
         React.DOM.div
             className: 'hotels'
+            React.DOM.a
+                href: 'javascript:void()'
+                onClick: @handleSignOut
+                'Sign Out'
             React.DOM.h2
                 className: 'title'
                 'Hotels'
