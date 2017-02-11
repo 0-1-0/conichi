@@ -1,20 +1,23 @@
-@SignIn = React.createClass(
+@SignIn = React.createClass
     getInitialState: ->
         email: ''
         password: ''
         password_confirmation: ''
         app: @props.app
-    handleSignInClick: ->
+    handleSignInClick: (e) ->
+        e.preventDefault()
         app = @state.app
         $.ajax(
-            method: 'POST',
-            url: '/users/sign_in.json',
+            method: 'POST'
+            url: '/users/sign_in.json'
             data:
               user:
-                email: @state.email,
-                password: @state.password,
+                email: @state.email
+                password: @state.password
                 provider: "email"
-            authenticity_token: Functions.getMetaContent("csrf-token")        
+            authenticity_token: Functions.getMetaContent("csrf-token")
+            error: ->
+              alert('Wrong email or password')
         ).done(app.login)
     handleChange: (ev) ->
         nextState = _.cloneDeep(@state)
@@ -22,6 +25,10 @@
         @setState(nextState)
     render: ->
       React.DOM.form null,
+          React.DOM.div
+            className: 'form-group'
+            React.DOM.h2 null,
+              'Please login'
           React.DOM.div
             className: 'form-group'
             React.DOM.input
@@ -47,17 +54,3 @@
                 onClick: @handleSignInClick
                 'Sign In'
 
-)
-      #   """<form>
-      #     <input type='email'
-      #       name='email'
-      #       placeholder='email'
-      #       value={this.state.email}
-      #       onChange={this._handleInputChange} />
-      #     <input type='password'
-      #       name='password'
-      #       placeholder='password'
-      #       value={this.state.password}
-      #       onChange={this._handleInputChange} />
-      #     <input type='submit' onClick={this._handleSignInClick} defaultValue='login' />
-      # </form>""")

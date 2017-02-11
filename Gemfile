@@ -32,8 +32,7 @@ gem 'lodash-rails'
 gem 'momentjs-rails'
 gem "rails-bootstrap-daterangepicker"
 
-gem 'react-rails', '~> 1.4.0'
-gem 'react-router-rails', '~>0.13.3.2'
+gem 'react-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

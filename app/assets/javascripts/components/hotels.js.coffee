@@ -1,19 +1,31 @@
 @Hotels = React.createClass
     getInitialState: ->
-        hotels: []#@props.data
+        hotels: []
         app: @props.app
         start: ''
         finish: ''
     getDefaultProps: ->
         hotels: []
-    handleSignOut: ->
+    handleSignOut: (e)->
+        e.preventDefault()
         app = @state.app
-        $.ajax(
-            method: 'DELETE',
-            url: '/users/sign_out.json',
+        $.ajax
+            method: 'DELETE'
+            url: '/users/sign_out.json'
             data:
                 authenticity_token: Functions.getMetaContent("csrf-token")
-            ).done(app.logout)
+        .done app.logout()
+    showCurrentBookings: (e)->
+        e.preventDefault()
+        app = @state.app
+        $.ajax
+            method: 'GET'
+            url: '/api/v1/bookings/' + app.state.user.id
+        .done (bookings)->
+            res = ''
+            for booking in bookings
+                res += booking.hotel + ', from ' + booking.start_date + ' to ' + booking.end_date + '\n'
+            alert res
     render: ->
         React.DOM.div
             className: 'hotels row'
@@ -27,6 +39,13 @@
                 React.DOM.h2
                     className: 'title'
                     'Book hotels nearby'
+            React.DOM.div
+                className: 'row'
+                React.DOM.a
+                    className: 'currentBookings'
+                    href: 'javascript:void()'
+                    onClick: @showCurrentBookings
+                    'Show my current bookings'
             React.DOM.div
                 className: 'row'
                 React.DOM.label
@@ -48,15 +67,13 @@
                                 React.DOM.th null, 'Photo'
                                 React.DOM.th null, ''
                         React.DOM.tbody null,
-                            for hotel in @state.hotels
-                                React.createElement Hotel, key: hotel.name, hotel: hotel, parent_state: @state
+                            for hotel, i in @state.hotels
+                                React.createElement Hotel, key: i, hotel: hotel, parent_state: @state
 
     componentDidMount: ->
         that = this
         $('input[class="daterange"]').daterangepicker(
-            {
-                buttonClasses: 'btn btn-default'
-            },
+            {},
             (start, finish, label) ->
                 that.state.start = start.format('YYYY-MM-DD')
                 that.state.finish = finish.format('YYYY-MM-DD')
@@ -73,3 +90,5 @@
                 contentType: 'application/json'
                 dataType: 'json').done (data) ->
                     that.setState({'hotels': data.data})
+        else
+            alert 'Location data is unavailable'

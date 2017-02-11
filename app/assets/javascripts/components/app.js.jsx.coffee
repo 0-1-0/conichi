@@ -1,16 +1,20 @@
 @App = React.createClass(
-  componentWillMount: ->
-    $.ajax(
+  fetchUser: ->
+    return $.ajax(
       method: 'GET'
       url: '/auth/is_signed_in.json').done ((data) ->
-      @setState signedIn: data.signed_in
+      @setState 
+        signedIn: data.signed_in
+        user: data.user
       return
     ).bind(this)
-    return
+  componentWillMount: ->
+    @fetchUser()
   getInitialState: ->
-    { signedIn: null }
+    { signedIn: null, user: null }
   login: ->
     @state.signedIn = true
+    @fetchUser()
     @forceUpdate()
   logout: ->
     @state.signedIn = false

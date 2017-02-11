@@ -1,11 +1,12 @@
-@SignUp = React.createClass(
+@SignUp = React.createClass
     getInitialState: ->
         email: ''
         password: ''
         password_confirmation: ''
         name: ''
         app: @props.app
-    handleSignUpClick: ->
+    handleSignUpClick: (e) ->
+        e.preventDefault()
         app = @state.app
         $.ajax(
             method: 'POST',
@@ -25,6 +26,10 @@
         @setState(nextState)
     render: ->
       React.DOM.form null,
+          React.DOM.div
+            className: 'form-group'
+            React.DOM.h2 null,
+              'Or register'
           React.DOM.div
             className: 'form-group'
             React.DOM.input
@@ -67,18 +72,3 @@
                 className: 'btn btn-default form-control'
                 onClick: @handleSignUpClick
                 'Sign Up'
-
-)
-      #   """<form>
-      #     <input type='email'
-      #       name='email'
-      #       placeholder='email'
-      #       value={this.state.email}
-      #       onChange={this._handleInputChange} />
-      #     <input type='password'
-      #       name='password'
-      #       placeholder='password'
-      #       value={this.state.password}
-      #       onChange={this._handleInputChange} />
-      #     <input type='submit' onClick={this._handleSignInClick} defaultValue='login' />
-      # </form>""")

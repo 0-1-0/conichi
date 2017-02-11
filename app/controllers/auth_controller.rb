@@ -4,7 +4,7 @@ class AuthController < ApplicationController
     if user_signed_in?
       render :json => {"signed_in" => true, "user" => current_user}.to_json()
     else
-      render :json => {"signed_in" => false}.to_json()
+      render :json => {"signed_in" => false, "user" => nil}.to_json()
     end
  
   end

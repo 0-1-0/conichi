@@ -88,7 +88,7 @@ GEM
       less (~> 2.6.0)
       sprockets (> 2, < 4)
       tilt
-    lodash-rails (4.17.2)
+    lodash-rails (4.17.4)
       railties (>= 3.1)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -136,16 +136,13 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (12.0.0)
     rdoc (4.3.0)
-    react-rails (1.4.2)
+    react-rails (1.10.0)
       babel-transpiler (>= 0.7.0)
       coffee-script-source (~> 1.8)
       connection_pool
       execjs
-      rails (>= 3.2)
+      railties (>= 3.2)
       tilt
-    react-router-rails (0.13.3.2)
-      rails (>= 3.1)
-      react-rails (~> 1.4.0)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
     sass (3.4.23)
@@ -212,8 +209,7 @@ DEPENDENCIES
   momentjs-rails
   rails (= 4.2.1)
   rails-bootstrap-daterangepicker
-  react-rails (~> 1.4.0)
-  react-router-rails (~> 0.13.3.2)
+  react-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   slim-rails

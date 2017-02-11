@@ -10,15 +10,15 @@
             React.DOM.td null, @props.hotel.address
             React.DOM.td null, @props.hotel.rating
             React.DOM.td null,
-                for photo_url in @props.hotel.photos
-                    React.DOM.img src: '/img/' + photo_url
+                for photo_url, i in @props.hotel.photos
+                    React.DOM.img src: '/img/' + photo_url, key: i
             React.DOM.td null,
                 React.DOM.button
                     className: 'btn btn-default' 
                     onClick: ->
-                        console.log state
-                        $.ajax(
+                        $.ajax
                             type: 'POST'
+                            charset: 'utf-8'
                             url: '/bookings'
                             data:
                                 hotel_name: hname
@@ -30,9 +30,6 @@
                             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                             success: ->
                                 alert('Booking confirmed!')
-                            error: (e)->
-                                alert('Booking start date overlaps with another record')
-                            charset: 'utf-8')
+                            error: (e) ->
+                                alert('Booking dates overlap with another record')
                     'Book'
-        # React.DOM.td null, @props.record.title
-        # React.DOM.td null, amountFormat(@props.record.amount)
