@@ -6,19 +6,22 @@
         app: @props.app
     handleSignInClick: (e) ->
         e.preventDefault()
-        app = @state.app
-        $.ajax(
-            method: 'POST'
-            url: '/users/sign_in.json'
-            data:
-              user:
-                email: @state.email
-                password: @state.password
-                provider: "email"
-            authenticity_token: Functions.getMetaContent("csrf-token")
-            error: ->
-              alert('Wrong email or password')
-        ).done(app.login)
+        if Functions.isEmail(@state.email)
+          app = @state.app
+          $.ajax(
+              method: 'POST'
+              url: '/users/sign_in.json'
+              data:
+                user:
+                  email: @state.email
+                  password: @state.password
+                  provider: "email"
+              authenticity_token: Functions.getMetaContent("csrf-token")
+              error: ->
+                alert('Wrong email or password')
+          ).done(app.login)
+        else
+          alert('Please eneter valid email address')
     handleChange: (ev) ->
         nextState = _.cloneDeep(@state)
         nextState[ev.target.name] = ev.target.value
