@@ -30,6 +30,7 @@
                                     start_date: state.start
                                     end_date: state.finish
                                     address: hadress
+                                    authenticity_token: Functions.getMetaContent("csrf-token")
                                 contentType: 'application/json'
                                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                                 success: ->

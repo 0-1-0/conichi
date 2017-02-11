@@ -11,6 +11,8 @@
           alert('Please enter valid email address')
         else if !@state.password
           alert('Please enter password')
+        else if @state.password.length < 6
+          alert('Please enter password of 6 characters or more')
         else if @state.password != @state.password_confirmation
           alert('Password does not match confirmation')
         else if !@state.name
@@ -27,8 +29,12 @@
                   password_confirmation: @state.password_confirmation,
                   name: @state.name,
                   provider: "email"
-              authenticity_token: Functions.getMetaContent("csrf-token")        
-          ).done(app.login)
+              authenticity_token: Functions.getMetaContent("csrf-token")  
+              error: ->
+                alert('User already exists')
+              success: (data) ->
+                app.login(data)
+          )
     handleChange: (ev) ->
         nextState = _.cloneDeep(@state)
         nextState[ev.target.name] = ev.target.value

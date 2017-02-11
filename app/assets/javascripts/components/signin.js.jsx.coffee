@@ -6,8 +6,8 @@
         app: @props.app
     handleSignInClick: (e) ->
         e.preventDefault()
+        app = @state.app
         if Functions.isEmail(@state.email)
-          app = @state.app
           $.ajax(
               method: 'POST'
               url: '/users/sign_in.json'
@@ -19,7 +19,9 @@
               authenticity_token: Functions.getMetaContent("csrf-token")
               error: ->
                 alert('Wrong email or password')
-          ).done(app.login)
+              success: (data) ->
+                app.login(data)
+          )
         else
           alert('Please eneter valid email address')
     handleChange: (ev) ->

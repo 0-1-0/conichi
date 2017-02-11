@@ -9,24 +9,34 @@
     handleSignOut: (e)->
         e.preventDefault()
         app = @state.app
-        $.ajax
-            method: 'DELETE'
+        $.ajax(
+            method: 'POST'
             url: '/users/sign_out.json'
             data:
                 authenticity_token: Functions.getMetaContent("csrf-token")
-        .done app.logout()
+            success: (data) ->
+                console.log data
+                csrf_param = data['csrf-param']
+                csrf_token = data['csrf-token']
+                if csrf_param
+                    $('meta[name="csrf-param"]').attr 'content', csrf_param
+                if csrf_token
+                    $('meta[name="csrf-token"]').attr 'content', csrf_token
+        ).done app.logout()
     showCurrentBookings: (e)->
         e.preventDefault()
-        app = @state.app
         $.ajax
             method: 'GET'
-            url: '/api/v1/bookings/' + app.state.user.id
+            url: '/api/v1/bookings/' + @state.app.getUserID()
         .done (bookings)->
             res = ''
             for booking in bookings
                 res += booking.hotel + ', from ' + booking.start_date + ' to ' + booking.end_date + '\n'
+            if bookings.length == 0
+                res = 'You have no bookings at the moment'
             alert res
     render: ->
+        app = @state.app
         React.DOM.div
             className: 'hotels row'
             React.DOM.div
@@ -35,7 +45,7 @@
                     className: 'pull-right'
                     href: 'javascript:void()'
                     onClick: @handleSignOut
-                    'Sign Out'
+                    'Sign Out'       
                 React.DOM.h2
                     className: 'title'
                     'Book hotels nearby'

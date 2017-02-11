@@ -6,20 +6,24 @@
       @setState 
         signedIn: data.signed_in
         user: data.user
-      return
     ).bind(this)
   componentWillMount: ->
     @fetchUser()
   getInitialState: ->
     { signedIn: null, user: null }
-  login: ->
+  getUserID: ->
+    return @state.user.id
+  login: (data) ->
+    console.log data
     @state.signedIn = true
-    @fetchUser()
+    @setState user: data
     @forceUpdate()
   logout: ->
     @state.signedIn = false
+    @setState user: null
     @forceUpdate()
   render: ->
+    console.log @state
     if @state.signedIn
       return `<Hotels app={this}/>`
     else

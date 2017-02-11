@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :bookings
-  devise_for :users, :controllers => { registrations: 'registrations' }
+  devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions' }
   get 'places/location'
 
   get 'home/index'
