@@ -13,10 +13,10 @@ class BookingsController < ApplicationController
     end
 
     def show
-        render json: Booking.all, include: 'user'
+        render json: {bookings: Booking.all}
     end
 
     def show_by_user
-        render json: User.find(params[:user_id]).bookings, include: 'user'
+        render json:{bookings: User.find(params[:user_id]).bookings}
     end
 end
