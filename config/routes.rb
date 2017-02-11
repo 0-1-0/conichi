@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   end
 
   post 'bookings' => 'bookings#create'
-  get 'bookings' => 'bookings#show'
+  get '/api/v1/bookings' => 'bookings#show'
+  get '/api/v1/bookings/:user_id' => 'bookings#show_by_user'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

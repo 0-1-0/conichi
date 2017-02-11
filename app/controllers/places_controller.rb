@@ -7,11 +7,6 @@ def location
       format.json {
         lat = params["lat"].to_f
         lng = params["lng"].to_f
-        # radius = 5000
-        # type = "restraunt"
-        # key = ""
-        # url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{lat},#{lng}&radius=#{radius}&types=#{type}&key=#{key}"
-        # data = JSON.load(open(url))
         @client = GooglePlaces::Client.new("AIzaSyBrl7pY8K15caxHLJ3D8_-uSiXXLuZos0c")
         spots = @client.spots(lat, lng, types: :lodging).map{ |spot| 
             {
@@ -27,10 +22,14 @@ def location
   end
 
     def image_proxy
-        image_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&photoreference=#{request.path.split('/')[-1]}&key=AIzaSyBrl7pY8K15caxHLJ3D8_-uSiXXLuZos0c"
-        response.headers['Cache-Control'] = "public, max-age=#{84.hours.to_i}"
-        response.headers['Content-Type'] = 'image/png'
-        response.headers['Content-Disposition'] = 'inline'
-        render :text => open(image_url, {ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}).read
+        key = params[:reference]
+        binary = Rails.cache.fetch(key) do
+            image_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&photoreference=#{key}&key=AIzaSyBrl7pY8K15caxHLJ3D8_-uSiXXLuZos0c"
+            response.headers['Cache-Control'] = "public, max-age=#{84.hours.to_i}"
+            response.headers['Content-Type'] = 'image/png'
+            response.headers['Content-Disposition'] = 'inline'
+            open(image_url, {ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}).read
+        end
+        render :text => binary
     end
 end
