@@ -41,6 +41,9 @@
             className: 'hotels row'
             React.DOM.div
                 className: 'row'
+                React.DOM.div
+                    className: 'pull-left'
+                    'UserID: ' + app.getUserID() 
                 React.DOM.a
                     className: 'pull-right'
                     href: 'javascript:void()'

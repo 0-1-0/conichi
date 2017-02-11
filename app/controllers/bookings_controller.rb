@@ -4,7 +4,7 @@ class BookingsController < ApplicationController
 
     def create
         puts current_user
-        b = Booking.create!(hotel: params[:hotel_name], address: params[:address], user: current_user, start_date: Date.parse(params[:start_date]), end_date: Date.parse(params[:end_date]))
+        b = Booking.create!(hotel: params[:hotel_name], address: params[:address], city: params[:address].split(', ').last, user: current_user, start_date: Date.parse(params[:start_date]), end_date: Date.parse(params[:end_date]))
         if b.save
             render json: b
         else
@@ -13,7 +13,7 @@ class BookingsController < ApplicationController
     end
 
     def show
-        render json: Booking.all
+        render json: Booking.all, include: 'user'
     end
 
     def show_by_user

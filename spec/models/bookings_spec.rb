@@ -16,6 +16,13 @@ RSpec.describe Booking, :type => :model do
       expect(user.reload.bookings).to eq([booking_1])
     end
 
+    it "creates bookings with overlapping dates but different users" do
+      user = User.create! email: 'test@test.com', name: 'username', password: 'testtest', password_confirmation: 'testtest'
+      user2 = User.create! email: 'tessst@test.com', name: 'userssname', password: 'testtssest', password_confirmation: 'testtssest'
+      booking_1 = user.bookings.create!(hotel: 'Hotel Example', start_date: Date.parse('28-12-2016'), end_date: Date.parse('01-01-2017'))
+      booking_2 = user2.bookings.create!(hotel: 'Hotel Example', start_date: Date.parse('28-12-2016'), end_date: Date.parse('01-01-2017'))
+    end
+
     it "orders bookings correctly" do
       user = User.create! email: 'test@test.com', name: 'username', password: 'testtest', password_confirmation: 'testtest'
       booking_1 = user.bookings.create!(hotel: 'Hotel Example', start_date: Date.parse('28-12-2016'), end_date: Date.parse('01-01-2017'))
