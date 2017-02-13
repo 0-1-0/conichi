@@ -3,11 +3,8 @@
 Simple hotel booking app made with Rails, React, and Bootstrap.
 Google Places API is used for fetching nearby places.
 
-* API
-
-All booknigs are available at /api/v1/bookings/
-Bookings made by specific user are available at /api/v1/bookings/:userID
+* All booknigs are available at /api/v1/bookings/
+* Bookings made by specific user are available at /api/v1/bookings/:userID
 (UserID is shown at the top of the interface after registration)
 
-* Testsing
-rspec spec
+* Testsing: rspec spec
