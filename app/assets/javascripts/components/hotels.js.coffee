@@ -28,9 +28,9 @@
         $.ajax
             method: 'GET'
             url: '/api/v1/bookings/' + @state.app.getUserID()
-        .done (bookings)->
+        .done (bookings) ->
             res = ''
-            for booking in bookings
+            for booking in bookings['bookings']
                 res += booking.hotel + ', from ' + booking.start_date + ' to ' + booking.end_date + '\n'
             if bookings.length == 0
                 res = 'You have no bookings at the moment'
