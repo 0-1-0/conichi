@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170211101017) do
+ActiveRecord::Schema.define(version: 20170213110339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,9 @@ ActiveRecord::Schema.define(version: 20170211101017) do
     t.string   "address"
   end
 
+  add_index "bookings", ["end_date"], name: "index_bookings_on_end_date", using: :btree
+  add_index "bookings", ["start_date", "end_date"], name: "index_bookings_on_start_date_and_end_date", using: :btree
+  add_index "bookings", ["start_date"], name: "index_bookings_on_start_date", using: :btree
   add_index "bookings", ["user_id"], name: "index_bookings_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
